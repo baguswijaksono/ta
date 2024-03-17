@@ -1,0 +1,164 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Prefabs/TestPlatform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Hazard.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://3 - Item and Pick Ups/create.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Crates.gd" type="Script" id=6]
+[ext_resource path="res://Prefabs/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/pathPoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/UI/HurtScene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/GUI.gd" type="Script" id=11]
+[ext_resource path="res://heart.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 29, 28.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31, 32.5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Active"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Destroyed"
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Slashed"
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 200, -134 )
+
+[node name="TestPlatform" parent="." instance=ExtResource( 1 )]
+position = Vector2( 59, 572 )
+
+[node name="TestPlatform2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 158, 572 )
+
+[node name="TestPlatform3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 257, 572 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 43, 455 )
+collision_mask = 2
+hurtScene = ExtResource( 9 )
+
+[node name="Hazard" parent="." instance=ExtResource( 3 )]
+position = Vector2( 196, 444 )
+scale = Vector2( 0.125163, 0.717581 )
+
+[node name="Coin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 150, 384 )
+
+[node name="Crates" type="Area2D" parent="."]
+position = Vector2( 217, 288 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Crates"]
+texture = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Crates"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/StaticBody2D"]
+position = Vector2( 0, -1.5 )
+shape = SubResource( 2 )
+
+[node name="anim" type="AnimationPlayer" parent="Crates"]
+autoplay = "Active"
+anims/Active = SubResource( 3 )
+anims/Destroyed = SubResource( 4 )
+anims/RESET = SubResource( 5 )
+anims/Slashed = SubResource( 6 )
+
+[node name="pathPoint" parent="." instance=ExtResource( 8 )]
+position = Vector2( 289, 529 )
+
+[node name="pathPoint2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 97, 525 )
+
+[node name="Enemy1" parent="." instance=ExtResource( 7 )]
+position = Vector2( 170, 506 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource( 11 )
+
+[node name="PlayerLife" type="Sprite" parent="GUI"]
+position = Vector2( 295, 70 )
+scale = Vector2( 1.00654, 0.972973 )
+texture = ExtResource( 10 )
+
+[node name="CoinLogo" type="Sprite" parent="GUI"]
+
+[node name="Heart" type="Sprite" parent="GUI"]
+position = Vector2( 604, 61 )
+texture = ExtResource( 12 )
+
+[node name="coinText" type="Label" parent="GUI"]
+margin_left = 562.0
+margin_top = 11.0
+margin_right = 602.0
+margin_bottom = 25.0
+text = "0"
+
+[connection signal="area_entered" from="Crates" to="Crates" method="_on_Crates_area_entered"]
