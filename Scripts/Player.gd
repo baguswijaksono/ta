@@ -63,6 +63,7 @@ func dash():
 	velocity.x = 0
 	
 func hurt():
+	frameFreeze(0.05, 1.0)
 	lives -= 1
 	var red = hurtScene.instance()
 	add_child(red)
@@ -96,6 +97,14 @@ func brust():
 
 func pogo():
 	pass
+
+func frameFreeze(timescale, duration):
+	Engine.time_scale = timescale
+	yield(get_tree().create_timer(duration * timescale), "timeout")
+	Engine.time_scale = 1.0
+	
+	
+	
 func _on_anim_animation_finished():
 	if $anim.animation == "Sword":
 		canSlash = false

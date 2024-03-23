@@ -12,7 +12,7 @@ const HEART_OFFSIDE_SIZE = 16
 	#	newHeart.hframes = $Heart.frame
 	#	$Heart.add_child(newHeart)
 
-func _process(delta):
+func _process(_delta):
 	$coinText.text = String(player.coinNumber)
 	
 	#for Heart in $Heart.get_children():
@@ -28,3 +28,12 @@ func _process(delta):
 		#	Heart.frame =(player.lives - lastHeart ) * 4
 		#if index < lastHeart :
 			#Heart.frame =4
+			
+func _unhandled_input(_event):
+	if Input.is_action_just_pressed("ui_cancel"):
+		$ColorRect.show()
+		get_tree().paused =true
+
+func _on_ResumeButton_pressed():
+	get_tree().paused =false
+	$ColorRect.hide()
