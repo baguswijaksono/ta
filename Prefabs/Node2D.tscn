@@ -93,13 +93,73 @@ position = Vector2( 158, 572 )
 [node name="TestPlatform3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 257, 572 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="TestPlatform4" parent="." instance=ExtResource( 12 )]
+position = Vector2( 357, 572 )
+
+[node name="TestPlatform6" parent="." instance=ExtResource( 12 )]
+position = Vector2( 456, 572 )
+
+[node name="TestPlatform7" parent="." instance=ExtResource( 12 )]
+position = Vector2( 555, 572 )
+
+[node name="TestPlatform18" parent="." instance=ExtResource( 12 )]
+position = Vector2( 555, 523 )
+collision_layer = 17
+
+[node name="TestPlatform19" parent="." instance=ExtResource( 12 )]
+position = Vector2( 555, 473 )
+collision_layer = 17
+
+[node name="TestPlatform20" parent="." instance=ExtResource( 12 )]
+position = Vector2( 555, 423 )
+collision_layer = 17
+
+[node name="TestPlatform8" parent="." instance=ExtResource( 12 )]
+position = Vector2( 655, 572 )
+
+[node name="TestPlatform9" parent="." instance=ExtResource( 12 )]
+position = Vector2( 755, 572 )
+
+[node name="TestPlatform10" parent="." instance=ExtResource( 12 )]
+position = Vector2( 854, 572 )
+
+[node name="TestPlatform11" parent="." instance=ExtResource( 12 )]
+position = Vector2( 954, 572 )
+
+[node name="TestPlatform12" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1053, 572 )
+
+[node name="TestPlatform13" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1152, 572 )
+
+[node name="TestPlatform14" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1152, 572 )
+
+[node name="TestPlatform15" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1250, 572 )
+
+[node name="TestPlatform16" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1350, 572 )
+
+[node name="TestPlatform17" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1350, 572 )
+
+[node name="TestPlatform5" parent="." instance=ExtResource( 12 )]
+position = Vector2( -199, 134 )
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 43, 455 )
+position = Vector2( 374, 525 )
 collision_mask = 2
 hurtScene = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( -257, -153 )
+scale = Vector2( 1.29452, 4.15869 )
+anchor_mode = 0
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 20.0
 
 [node name="Hazard" parent="." instance=ExtResource( 10 )]
 position = Vector2( 196, 444 )
@@ -150,6 +210,6 @@ position = Vector2( -138, 532 )
 position = Vector2( -50, 393 )
 
 [node name="Gate" parent="." instance=ExtResource( 15 )]
-position = Vector2( -68, 525 )
+position = Vector2( 702, 457 )
 
 [connection signal="area_entered" from="Crates" to="Crates" method="_on_Crates_area_entered"]

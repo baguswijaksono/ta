@@ -10,7 +10,7 @@ var coinScene = preload("res://Prefabs/Coin.tscn")
 var lives = 3
 
 func _ready():
-	$pathDetector.connect("area_entered", self ,"onPathEntered")
+	var _pathdetector = $pathDetector.connect("area_entered", self ,"onPathEntered")
 
 func _process(delta):
 	velocity.x = direction.x * speed

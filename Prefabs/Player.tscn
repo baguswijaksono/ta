@@ -10,7 +10,6 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=8]
 [ext_resource path="res://0 - Player/Walk/long slicer8.png" type="Texture" id=9]
 [ext_resource path="res://0 - Player/Attack/long slicer2.png" type="Texture" id=10]
-[ext_resource path="res://0 - Player/Attack/long slicer1.png" type="Texture" id=11]
 [ext_resource path="res://0 - Player/Attack/long slicer3.png" type="Texture" id=12]
 [ext_resource path="res://0 - Player/Attack/long slicer7.png" type="Texture" id=13]
 [ext_resource path="res://0 - Player/Attack/long slicer10.png" type="Texture" id=14]
@@ -38,15 +37,20 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "Sword",
-"speed": 10.0
+"speed": 9.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "WallSlide",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -54,14 +58,15 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 11.5, 10 )
 
+[sub_resource type="RectangleShape2D" id=4]
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 492, 290 )
 script = ExtResource( 8 )
 
 [node name="anim" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "Sword"
-frame = 4
+animation = "WallSlide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -15, 4 )
@@ -74,6 +79,34 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2( 8, 4 )
 shape = SubResource( 3 )
+disabled = true
+
+[node name="RightWall" type="RayCast2D" parent="."]
+position = Vector2( -3, 4 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 16
+
+[node name="LeftWall" type="RayCast2D" parent="."]
+position = Vector2( -27, 4 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 16
+
+[node name="UpBrust" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpBrust"]
+position = Vector2( -15, -17 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="DownBrust" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownBrust"]
+position = Vector2( -15, 25 )
+shape = SubResource( 4 )
 disabled = true
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

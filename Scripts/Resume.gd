@@ -6,5 +6,4 @@ func _unhandled_input(event):
 		get_tree().paused =true
 
 func _on_Resume_pressed():
-	
 	get_tree().paused =false

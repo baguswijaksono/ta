@@ -32,8 +32,13 @@ func _process(_delta):
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		$ColorRect.show()
+		$ColorRect/VBoxContainer/ResumeButton.grab_focus()
 		get_tree().paused =true
 
 func _on_ResumeButton_pressed():
 	get_tree().paused =false
 	$ColorRect.hide()
+
+func _on_ReturnMain_pressed():
+	if get_tree().change_scene("res://Scene/Menu.tscn") != OK:
+		print ("An unexpected error occured when trying to switch to the scene")

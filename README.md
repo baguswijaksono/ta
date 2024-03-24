@@ -16,8 +16,9 @@
 - Creating a GUI & displaying the coin collected
 - Displaying the number of lives in the GUI
 - Add dash mechanics
-## To do
 - Adding Double Jump
 - Adding Wall Jump & Wall slide
 - Create Breaking Platform
+## To do
+- add save and load progess
 
